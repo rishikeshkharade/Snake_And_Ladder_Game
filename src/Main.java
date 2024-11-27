@@ -18,10 +18,11 @@ public class Main {
                     System.out.println("Option: No Play. Player stays at position: " + position);
                     break;
                 case 1:
-                    position += dice;
-                    if (position > Winning_Postion) {
-                        position -= dice;
+
+                    if (position + dice> Winning_Postion) {
+                        System.out.println("Move exceeds 100. Stay at position"+ position);
                     } else {
+                        position += dice;
                         System.out.println("Option: Ladder. Player climbs to: " + position);
                     }
                     break;
