@@ -8,8 +8,11 @@ public class Main {
         System.out.println("Starting Position of Player: " + position);
 
         Random random = new Random();
+
+        int diceRoll=0;
         while (position < Winning_Postion) {
             int dice = random.nextInt(6) + 1;
+            diceRoll++;
             System.out.println("Rolled the die: " + dice);
 
             int option = random.nextInt(3);
@@ -36,8 +39,9 @@ public class Main {
                 default:
                     System.out.println("Option is not valid");
             }
+            System.out.println("Current Position of the Player: "+ position);
 
         }
-        System.out.println("Current Position " + position);
+        System.out.println("No. of times the dice rolled: "+diceRoll);
     }
 }
