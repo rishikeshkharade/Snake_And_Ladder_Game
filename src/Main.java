@@ -3,45 +3,92 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to the Snake and Ladder Game!");
 
-        int position = 0;
+        int Player1position=0;
+        int Player2position=0;
         int Winning_Postion = 100;
-        System.out.println("Starting Position of Player: " + position);
+        int Player1diceRoll=0;
+        int Player2diceRoll=0;
 
+        System.out.println("Starting Position of Player1 & Player2: " + Player1position);
         Random random = new Random();
+        boolean Player1turn = true;
 
-        int diceRoll=0;
-        while (position < Winning_Postion) {
-            int dice = random.nextInt(6) + 1;
-            diceRoll++;
-            System.out.println("Rolled the die: " + dice);
+        while (Player1position < Winning_Postion && Player2position<Winning_Postion) {
+            if(Player1turn){
+                Player1diceRoll++;
+                System.out.println("Player 1's Turn: ");
+                int dice = random.nextInt(6) + 1;
+                System.out.println("Rolled the die: " + dice);
+                int option = random.nextInt(3);
 
-            int option = random.nextInt(3);
             switch (option) {
                 case 0:
-                    System.out.println("Option: No Play. Player stays at position: " + position);
+                    System.out.println("Option: No Play. Player stays at position: " + Player1position);
+                    Player1turn=false;
                     break;
                 case 1:
 
-                    if (position + dice> Winning_Postion) {
-                        System.out.println("Move exceeds 100. Stay at position"+ position);
+                    if (Player1position + dice > Winning_Postion) {
+                        System.out.println("Move exceeds 100. Stay at position" + Player1position);
                     } else {
-                        position += dice;
-                        System.out.println("Option: Ladder. Player climbs to: " + position);
+                        Player1position += dice;
+                        System.out.println("Option: Ladder. Player climbs to: " + Player1position);
+                        Player1turn = true;
                     }
                     break;
                 case 2:
-                    position -= dice;
-                    if (position <= 0) {
-                        position = 0;
+                    Player1position -= dice;
+                    if (Player1position <= 0) {
+                        Player1position = 0;
                     }
-                    System.out.println("Option: Snake. Player slides to: " + position);
+                    System.out.println("Option: Snake. Player slides to: " + Player1position);
+                    Player1turn=false;
                     break;
-                default:
-                    System.out.println("Option is not valid");
             }
-            System.out.println("Current Position of the Player: "+ position);
+            }else {
+                Player2diceRoll++;
+                System.out.println("Player 2's Turn: ");
+                int dice = random.nextInt(6) + 1;
+                System.out.println("Rolled the die: " + dice);
+                int option = random.nextInt(3);
+
+                switch (option) {
+                    case 0:
+                        System.out.println("Option: No Play. Player stays at position: " + Player2position);
+                        Player1turn = true;
+                        break;
+                    case 1:
+
+                        if (Player2position + dice > Winning_Postion) {
+                            System.out.println("Move exceeds 100. Stay at position" + Player2position);
+                        } else {
+                            Player2position += dice;
+                            System.out.println("Option: Ladder. Player climbs to: " + Player2position);
+                            Player1turn = false;
+                        }
+                        break;
+                    case 2:
+                        Player2position -= dice;
+                        if (Player2position <= 0) {
+                            Player2position = 0;
+                        }
+                        System.out.println("Option: Snake. Player slides to: " + Player2position);
+                        Player1turn = true;
+                        break;
+
+                }
+            }
+
+            System.out.println("Current Position of the Player 1: "+ Player1position);
+            System.out.println("Current Position of the Player 2: "+ Player2position);
+            System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 
         }
-        System.out.println("No. of times the dice rolled: "+diceRoll);
+        if(Player1position==Winning_Postion){
+            System.out.println("Congratulations! Player 1 won");
+        }else {
+            System.out.println("Congratulations! Player 2 won");
+        }
+        System.out.println("No. of times the dice rolled Player 1: "+Player1diceRoll+" No. of times the dice rolled Player 2: "+Player1diceRoll);
     }
 }
